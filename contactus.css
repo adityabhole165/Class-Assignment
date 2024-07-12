@@ -6,6 +6,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    
 }
 
 .contact-form {
@@ -13,7 +14,7 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 600px;
 }
 
 .contact-form h2 {
@@ -29,7 +30,7 @@ body {
 .contact-form input[type="text"],
 .contact-form input[type="file"],
 .contact-form textarea {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;

@@ -2,10 +2,10 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['admin_name'])) {
-    header("Location: login.html");
-    exit();
-}
+// if (!isset($_SESSION['admin_name'])) {
+//     header("Location: login.html");
+//     exit();
+// }
 
 // Database connection
 $servername = "localhost"; // Change as necessary
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $message = mysqli_real_escape_string($conn, $_POST['address']);
     $message = mysqli_real_escape_string($conn, $_POST['message']);
 
-    $sql = "UPDATE admindashboard SET 
+    $sql = "UPDATE contacts SET 
                 name='$name', 
                 image='$image', 
                 city='$city', 

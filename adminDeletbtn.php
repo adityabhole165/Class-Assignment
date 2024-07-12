@@ -2,10 +2,10 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['admin_name'])) {
-    header("Location: login.html");
-    exit();
-}
+// if (!isset($_SESSION['name'])) {
+//     header("Location: home.php");
+//     exit();
+// }
 
 // Database connection
 $servername = "localhost"; // Change as necessary
@@ -24,7 +24,7 @@ if ($conn->connect_error) {
 // Delete the user from the database
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $id = $_POST['id'];
-    $sql = "DELETE FROM admindashboard WHERE id='$id'";
+    $sql = "DELETE FROM contacts WHERE id='$id'";
     if ($conn->query($sql) === TRUE) {
         echo "Record deleted successfully";
     } else {

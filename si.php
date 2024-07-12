@@ -43,7 +43,7 @@ $conn->close();
     <!-- Slider main container -->
     <div class="swiper">
         <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper" style="width: 100%;">
             <?php if (!empty($imagePaths)): ?>
                 <?php foreach ($imagePaths as $imagePath): ?>
                     <?php
@@ -53,8 +53,21 @@ $conn->close();
                     $imageUrl = $base_url . $imageName;
                     ?>
                     <!-- Slides -->
-                    <div class="swiper-slide">
-                        <img src="<?php echo $imageUrl; ?>" alt="Image" class="d-block w-100" width="1300" height="725">
+                    <div class="swiper-slide" >
+                        <img src="<?php echo $imageUrl; ?>" alt="Image" class="d-block w-100" width="1500" height="725">
+                        <p>
+                            Hello <?php
+                            if(isset($_SESSION['username']))
+                            {
+                                    $username = $_SESSION['username'];
+                                    $query = mysqli_query($con, "SELECT userdata.* FROM `userdata` WHERE userdata.username = '$username'");
+                                    while($row = mysqli_fetch_array($query))
+                                        {
+                                            echo $row['username'];
+                                        }
+                            }
+                            ?>
+                        </p>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>

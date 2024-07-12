@@ -2,10 +2,10 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['admin_name'])) {
-    header("Location: login.html");
-    exit();
-}
+// if (!isset($_SESSION['name'])) {
+//     header("Location: home.php");
+//     exit();
+// }
 
 // Database connection
 $servername = "localhost"; // Change as necessary
@@ -22,12 +22,13 @@ if ($conn->connect_error) {
 }
 
 // Fetch user data
-$id = $_GET['id'];
-$sql = "SELECT * FROM admindashboard WHERE id='$id'";
+// $id = $_GET['id'];
+$sql = "SELECT * FROM contacts WHERE id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    // echo $row;
 } else {
     echo "No record found";
     exit();
@@ -40,7 +41,7 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update User</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="adminUpdate.css">
 </head>
 <body>
     <div class="update-container">

@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in
 // if (!isset($_SESSION['admin'])) {
-//     header("Location: login.html");
+//     header("Location: home.php");
 //     exit();
 // }
 
@@ -22,7 +22,8 @@ if ($conn->connect_error) {
 }
 
 // Fetch data from the database
-$sql = "SELECT * FROM contacts";
+$sql = "SELECT id, name, city, address, message FROM contacts";
+
 $result = $conn->query($sql);
 
 ?>
@@ -38,39 +39,45 @@ $result = $conn->query($sql);
     <div class="dashboard-container">
         <h2>Welcome Admin</h2>
         <a href="index.php" class="logout-btn">LOGOUT</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>USERNAME</th>
-                    <th>City</th>
-                    <th>Address</th>
-                    <th>Message</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . $row['name'] . "</td>";
-                        echo "<td>" . $row['city'] . "</td>";
-                        echo "<td>" . $row['address'] . "</td>";
-                        echo "<td>" . $row['message'] . "</td>";
-                        echo "<td>
-                                <button class='adminDeletbtn.php'>Delete</button>
-                                <button class='adminUpdate.php'>Update</button>
-                            </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='6'>No records found</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+        <?php
+        if ($result->num_rows > 0) {
+        echo "<table>
+            <tr>
+                <th>ID</th>
+                <th>USERNAME</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Message</th>
+                <th>Action</th>
+            </tr>";
+    while($row = $result->fetch_assoc()) {
+        $user_id = $row['id'];
+        $username = $row['name'];
+        $city = $row['city'];
+        $address = $row['address'];
+        $message = $row['message'];
+        echo "<tr>
+                <td>$user_id</td>
+                <td>$username</td>
+                <td>$city</td>
+                <td>$address</td>
+                <td>$message</td>
+                <td>
+                    <form method='POST' action='adminDeletbtn.php' style='display:inline;'>
+                        <input type='hidden' name='id' value='" . $user_id . "'>
+                        <button type='submit' style='background-color:red;color:white;'>Delete</button>
+                    </form>
+                    <form method='POST' action='adminUpdate.php' style='display:inline;'>
+                        <input type='hidden' name='id' value='" . $user_id . "'>
+                        <button type='submit' style='background-color:blue;color:white;'>Update</button>
+                    </form>
+                </td>
+            </tr>";
+    }
+    echo "</table>";?>
+<?php } else {
+    echo "0 results";
+}?>
     </div>
 </body>
 </html>

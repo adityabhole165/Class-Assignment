@@ -64,7 +64,8 @@ form input[type="submit"]:hover {
 </head>
 <body>
     <form action="update.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+        <label for="id">id</label>
+        <input type="number" name="id" value="<?php echo $row['id']; ?>">
         <label for="name">Name:</label>
         <input type="text" name="name" value="<?php echo $row['name']; ?>">
         <br>
